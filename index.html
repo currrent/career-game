@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#17133e">
+  <meta name="description" content="Карьера — idle-игра про путь к удалённой работе мечты">
+  <title>Карьера — игра про удалёнку</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main class="game-shell">
+    <header class="topbar">
+      <div class="wallet pill">
+        <span class="coin coin-big">₽</span>
+        <div><small>ТВОЙ БАЛАНС</small><strong id="balance">0 ₽</strong></div>
+      </div>
+      <div class="income pill">
+        <span class="income-icon">↗</span>
+        <div><small>ПАССИВНЫЙ ДОХОД</small><strong id="income">+0 ₽/сек</strong></div>
+      </div>
+      <button class="round-btn" id="settingsBtn" aria-label="Настройки">⚙</button>
+    </header>
+
+    <section class="career-card panel">
+      <div class="briefcase">💼</div>
+      <div class="career-info">
+        <div class="career-title-row"><h1 id="rankName">Стажёр</h1><span id="rankNumber">УРОВЕНЬ 1/10</span></div>
+        <div class="progress-line"><div id="rankProgress"></div></div>
+        <small id="rankHint">Следующая ступень: Джуниор</small>
+      </div>
+      <div class="rank-badge" id="rankBadge">1</div>
+    </section>
+
+    <section class="work-scene" id="work-scene" aria-label="Рабочее место">
+      <div class="window-glow"></div>
+      <div class="shelf"><span>🪴</span><span>📚</span><span>🪴</span></div>
+      <div class="wall-note">Мечтай.<br>Работай.<br><b>Зарабатывай!</b></div>
+      <div class="lamp">💡</div>
+      <div class="plant plant-left">🪴</div>
+      <div class="cat" id="cat" title="Похоже, кот одобряет твой карьерный рост">🐈</div>
+      <div class="desk">
+        <div class="laptop" id="laptop" role="button" tabindex="0" aria-label="Нажми, чтобы заработать">
+          <div class="screen">
+            <div class="screen-glow"></div>
+            <div class="screen-coin">₽</div>
+            <span class="tap-hint">НАЖМИ!</span>
+          </div>
+          <div class="keyboard"><span></span><span></span><span></span></div>
+        </div>
+        <div class="mug">☕</div>
+      </div>
+      <div class="float-layer" id="floatLayer"></div>
+    </section>
+
+    <button class="earn-button" id="earnBtn">
+      <span class="click-hand">☝</span>
+      <span><b>Заработать</b><small id="clickValue">+1 ₽ за клик</small></span>
+      <span class="button-spark">✦</span>
+    </button>
+
+    <section class="upgrades panel" id="upgradeSection">
+      <div class="section-heading">
+        <div><span class="rocket">🚀</span><div><h2>Улучшения</h2><small>Прокачивай карьеру и доход</small></div></div>
+        <span class="owned-count" id="ownedCount">0 куплено</span>
+      </div>
+      <div class="upgrade-list" id="upgradeList"></div>
+    </section>
+
+    <section class="tab-panel panel hidden" id="tabPanel"></section>
+
+    <nav class="bottom-nav">
+      <button class="nav-item active" data-tab="home"><span>⌂</span><small>Главная</small></button>
+      <button class="nav-item" data-tab="stats"><span>▥</span><small>Статистика</small></button>
+      <button class="nav-item" data-tab="achievements"><span>🏆</span><small>Награды</small></button>
+      <button class="nav-item" data-tab="bonus"><span>🎁</span><small>Бонусы</small><i class="nav-dot" id="bonusDot"></i></button>
+      <button class="nav-item" data-tab="shop"><span>🛒</span><small>Магазин</small></button>
+    </nav>
+    <div class="toast" id="toast" role="status"></div>
+    <footer>КАРЬЕРА • ТВОЙ ПУТЬ К УДАЛЁНКЕ</footer>
+  </main>
+  <script src="js/storage.js"></script>
+  <script src="js/economy.js"></script>
+  <script src="js/upgrades.js"></script>
+  <script src="js/animation.js"></script>
+  <script src="js/game.js"></script>
+</body>
+</html>
