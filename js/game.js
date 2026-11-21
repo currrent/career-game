@@ -1,31 +1,312 @@
-(()=>{
-const $=id=>document.getElementById(id),fmt=n=>{n=Math.floor(n||0);if(n>=1e15)return(n/1e15).toFixed(2)+" квадрлн";if(n>=1e12)return(n/1e12).toFixed(2)+" трлн";if(n>=1e9)return(n/1e9).toFixed(2)+" млрд";if(n>=1e6)return(n/1e6).toFixed(2)+" млн";return n.toLocaleString("ru-RU")},money=n=>fmt(n)+" ₽";
-const upgrades=[
-["intern","Стажёр","Первый шаг в удалённой карьере","💻",10,0,1,0],
-["junior","Джуниор","Первые задачи и стабильный ритм","☕",350,1,0,100],
-["specialist","Специалист","Ты уже уверенно в профессии","🎧",12000,12,0,2500],
-["designer","Дизайнер","Идеи превращаются в результат","🎨",300000,110,0,80000],
-["analyst","Аналитик","Решаешь задачи на уровне системы","📊",9000000,900,0,2500000],
-["senior","Сеньор","Сложные проекты — твоя стихия","🧠",270000000,7500,0,90000000],
-["lead","Тимлид","Ведёшь команду к результату","🧑‍💼",8100000000,65000,0,3000000000],
-["chef","Шеф","Управляешь направлением и бюджетами","🧑‍🍳",243000000000,550000,0,100000000000],
-["director","Директор","Строишь большую удалённую компанию","🏢",7290000000000,4800000,0,3500000000000],
-["founder","Владелец бизнеса","Твой бизнес работает на тебя","🚀",218700000000000,42000000,0,120000000000000]];
-const ranks=upgrades.map((u,i)=>({name:u[1],need:u[7]}));
-const achievements=[["first","Первый рубль","Первые 10 ₽","🪙",10],["hundred","Первая сотня","Накопи 100 ₽","💯",100],["thousand","Тысячник","Заработай 1 000 ₽","🏅",1000],["remote","На удалёнке","Заработай 10 000 ₽","🏡",10000],["million","Миллионер","Заработай 1 млн ₽","👑",1e6],["billion","Большая игра","Заработай 1 млрд ₽","💎",1e9]];
-let s={balance:0,total:0,clicks:0,owned:{},ach:[],last:Date.now(),bonus:0};try{s={...s,...JSON.parse(localStorage.getItem("career_idle_v2")||"{}")}}catch(e){}s.owned=s.owned||{};s.ach=s.ach||[];
-let income=0,power=1,last=Date.now(),saveTimer;
-function recalc(){income=0;power=1+(s.owned.intern||0);upgrades.forEach(u=>income+=(s.owned[u[0]]||0)*u[5])}
-function rank(){let r=0;ranks.forEach((x,i)=>{if(s.total>=x.need)r=i});return r}
-function save(){s.last=Date.now();localStorage.setItem("career_idle_v2",JSON.stringify(s))}
-function saveSoon(){clearTimeout(saveTimer);saveTimer=setTimeout(save,700)}
-function toast(t){let e=$("toast");e.textContent=t;e.classList.add("show");clearTimeout(e.timer);e.timer=setTimeout(()=>e.classList.remove("show"),1800)}
-function checkAch(){achievements.forEach(a=>{if(s.total>=a[4]&&!s.ach.includes(a[0])){s.ach.push(a[0]);toast("🏆 "+a[1])}})}
-function update(){let ri=rank(),r=ranks[ri],next=ranks[Math.min(ri+1,9)];$("balance").textContent=money(s.balance);$("income").textContent="+"+fmt(income)+" ₽/сек";$("rank").textContent=r.name;$("level").textContent="УРОВЕНЬ "+(ri+1)+"/10";$("badge").textContent=ri+1;$("clickValue").textContent="+"+fmt(power)+" ₽ за клик";$("progress").style.width=(ri===9?100:Math.min(100,(s.total-r.need)/(next.need-r.need)*100))+"%";$("next").textContent=ri===9?"Максимальный уровень!":"До "+next.name+": "+money(Math.max(0,next.need-s.total));let stage=ri<3?1:ri<6?2:3;$("scene").className="scene stage"+stage;$("caption").textContent=["ДОМАШНИЙ ОФИС","ПРОКАЧАННЫЙ ОФИС","ОФИС РУКОВОДИТЕЛЯ"][stage-1]+" · УРОВЕНЬ "+(ri+1);$("cat").style.transform=stage===3?"scale(.75)":"";document.querySelectorAll(".upgrade").forEach((c,i)=>{let u=upgrades[i],un=s.total>=u[7],price=Math.ceil(u[4]*Math.pow(1.42,s.owned[u[0]]||0)),can=un&&s.balance>=price;c.classList.toggle("can",can);c.classList.toggle("locked",!un);let b=c.querySelector("button");b.disabled=!un;b.classList.toggle("ready",can);b.innerHTML=(un?"Купить":"Закрыто")+"<strong>"+(un?"🪙 "+fmt(price)+" ₽":"🔒")+"</strong>"})}
-function render(){let list=$("upgrades");list.innerHTML="";upgrades.forEach(u=>{let c=document.createElement("article");c.className="upgrade";c.innerHTML=`<div class="art">${u[3]}</div><div class="copy"><b>${u[1]} <span style="color:#a8f88d">×${s.owned[u[0]]||0}</span></b><em>${u[6]?"+"+u[6]+" ₽ к клику за покупку":"+"+fmt(u[5])+" ₽/сек"}</em><small>${u[2]}</small></div><button class="buy">Купить</button>`;c.querySelector("button").onclick=()=>buy(u);list.appendChild(c)});$("owned").textContent=Object.values(s.owned).reduce((a,b)=>a+b,0)+" куплено";update()}
-function buy(u){if(s.total<u[7])return toast("Пока закрыто — заработай больше");let count=s.owned[u[0]]||0,price=Math.ceil(u[4]*Math.pow(1.42,count));if(s.balance<price)return toast("Не хватает рублей");let old=rank();s.balance-=price;s.owned[u[0]]=count+1;recalc();render();if(u[0]==="intern")toast("Стажёр прокачан! Теперь +"+power+" ₽ за клик ⚡");else toast(u[1]+" куплен!");if(rank()>old){$("scene").classList.add("levelup");toast("✨ Карьерный рост: "+ranks[rank()].name)}save()}
-function earn(){s.balance+=power;s.total+=power;s.clicks++;checkAch();let r=$("laptop").getBoundingClientRect(),layer=$("floatLayer"),root=$("scene").getBoundingClientRect();let f=document.createElement("div");f.className="float";f.textContent="+"+fmt(power)+" ₽";f.style.left=(r.left-root.left+r.width/2)+"px";f.style.top=(r.top-root.top+30)+"px";layer.appendChild(f);setTimeout(()=>f.remove(),1050);for(let i=0;i<5;i++){let c=document.createElement("span");c.className="coinfly";c.textContent="🪙";c.style.left=(r.left-root.left+r.width/2)+"px";c.style.top=(r.top-root.top+45)+"px";c.style.setProperty("--dx",(Math.random()*120-60)+"px");c.style.setProperty("--dy",(-45-Math.random()*70)+"px");layer.appendChild(c);setTimeout(()=>c.remove(),1000)}$("scene").classList.remove("clicking");void $("scene").offsetWidth;$("scene").classList.add("clicking");update();saveSoon()}
-function tab(name){$("upgrades").classList.toggle("hidden",name!=="home");$("scene").classList.toggle("hidden",name!=="home");$("earn").classList.toggle("hidden",name!=="home");$("panel").classList.toggle("hidden",name==="home");document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("active",b.dataset.tab===name));let p=$("panel");if(name==="stats")p.innerHTML=`<h2>📊 Статистика</h2><div class="stat-grid"><div class="stat"><small>Всего заработано</small><b>${money(s.total)}</b></div><div class="stat"><small>Доход в секунду</small><b>${fmt(income)} ₽</b></div><div class="stat"><small>Всего кликов</small><b>${fmt(s.clicks)}</b></div><div class="stat"><small>За клик</small><b>${fmt(power)} ₽</b></div></div>`;if(name==="achievements")p.innerHTML="<h2>🏆 Достижения</h2>"+achievements.map(a=>`<div class="achievement ${s.ach.includes(a[0])?"done":""}"><span>${a[3]}</span><div><b>${a[1]}</b><small>${a[2]}</small></div></div>`).join("");if(name==="bonus"){let ready=Date.now()-s.bonus>=86400000;p.innerHTML=`<div class="gift">🎁</div><h2 style="text-align:center">Ежедневный бонус</h2><p style="text-align:center;color:#c4c2ed">Подарок раз в 24 часа — 60 секунд пассивного дохода.</p><button class="bonus-button" id="claim" ${ready?"":"disabled"}>${ready?"Забрать "+money(Math.max(25,income*60)):"Уже получен"}</button>`;$("claim").onclick=()=>{let gift=Math.max(25,income*60);s.bonus=Date.now();s.balance+=gift;s.total+=gift;update();tab("bonus");toast("Подарок: "+money(gift));save()}}if(name==="shop")p.innerHTML="<h2>🛒 Магазин</h2><p>Рабочее место меняется вместе с карьерой: домашний офис, прокачанный сетап и офис руководителя.</p>"}
-function tick(){let now=Date.now(),dt=Math.min((now-last)/1000,5);last=now;if(income){let gain=income*dt;s.balance+=gain;s.total+=gain;checkAch();update()}saveSoon();requestAnimationFrame(tick)}
-function init(){recalc();let away=Math.min(8*3600,Math.max(0,(Date.now()-(s.last||Date.now()))/1000)),gain=away*income;if(gain>1){s.balance+=gain;s.total+=gain;setTimeout(()=>toast("Пока тебя не было: +"+money(gain)),350)}render();$("earn").onclick=earn;$("laptop").onclick=earn;$("laptop").onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();earn()}};$("coffee").onclick=earn;document.querySelectorAll("nav button").forEach(b=>b.onclick=()=>tab(b.dataset.tab));$("settings").onclick=()=>{if(confirm("Сбросить весь прогресс?")){localStorage.removeItem("career_idle_v2");location.reload()}};document.addEventListener("visibilitychange",()=>{if(document.hidden)save();else last=Date.now()});window.addEventListener("beforeunload",save);requestAnimationFrame(tick)}
-init()})();
+(() => {
+  const $ = id => document.getElementById(id);
+  const fmt = n => {
+    n = Math.floor(n || 0);
+    if (n >= 1e15) return (n / 1e15).toFixed(2) + " квадрлн";
+    if (n >= 1e12) return (n / 1e12).toFixed(2) + " трлн";
+    if (n >= 1e9) return (n / 1e9).toFixed(2) + " млрд";
+    if (n >= 1e6) return (n / 1e6).toFixed(2) + " млн";
+    return n.toLocaleString("ru-RU");
+  };
+  const money = n => fmt(n) + " ₽";
+
+  // Формат: [ID, Название, Описание, Иконка, БазоваяЦена, Доход, СилаКлика, ТребуемыйВсегоДоход]
+  const upgrades = [
+    ["intern", "Стажёр", "Первый шаг в удалённой карьере", "💻", 10, 0, 1, 0],
+    ["junior", "Джуниор", "Первые задачи и стабильный ритм", "☕", 350, 1, 0, 100],
+    ["specialist", "Специалист", "Ты уже уверенно в профессии", "🎧", 12000, 12, 0, 2500],
+    ["designer", "Дизайнер", "Идеи превращаются в результат", "🎨", 300000, 110, 0, 80000],
+    ["analyst", "Аналитик", "Решаешь задачи на уровне системы", "📊", 9000000, 900, 0, 2500000],
+    ["senior", "Сеньор", "Сложные проекты — твоя стихия", "🧠", 270000000, 7500, 0, 90000000],
+    ["lead", "Тимлид", "Ведёшь команду к результату", "🧑‍💼", 8100000000, 65000, 0, 3000000000],
+    ["chef", "Шеф", "Управляешь направлением и бюджетами", "🧑‍🍳", 243000000000, 550000, 0, 100000000000],
+    ["director", "Директор", "Строишь большую удалённую компанию", "🏢", 7290000000000, 4800000, 0, 3500000000000],
+    ["founder", "Владелец бизнеса", "Твой бизнес работает на тебя", "🚀", 218700000000000, 42000000, 0, 120000000000000]
+  ];
+
+  const ranks = upgrades.map((u, i) => ({ name: u[1], need: u[7] }));
+
+  const achievements = [
+    ["first", "Первый рубль", "Первые 10 ₽", "🪙", 10],
+    ["hundred", "Первая сотня", "Накопи 100 ₽", "💯", 100],
+    ["thousand", "Тысячник", "Заработай 1 000 ₽", "🏅", 1000],
+    ["remote", "На удалёнке", "Заработай 10 000 ₽", "🏡", 10000],
+    ["million", "Миллионер", "Заработай 1 млн ₽", "👑", 1e6],
+    ["billion", "Большая игра", "Заработай 1 млрд ₽", "💎", 1e9]
+  ];
+
+  let s = { balance: 0, total: 0, clicks: 0, owned: {}, ach: [], last: Date.now(), bonus: 0 };
+  try {
+    s = { ...s, ...JSON.parse(localStorage.getItem("career_idle_v2") || "{}") };
+  } catch (e) {}
+  s.owned = s.owned || {};
+  s.ach = s.ach || [];
+
+  let income = 0, power = 1, last = Date.now(), saveTimer;
+
+  function recalc() {
+    income = 0;
+    power = 1 + (s.owned.intern || 0);
+    upgrades.forEach(u => income += (s.owned[u[0]] || 0) * u[5]);
+  }
+
+  function rank() {
+    let r = 0;
+    ranks.forEach((x, i) => { if (s.total >= x.need) r = i; });
+    return r;
+  }
+
+  function save() {
+    s.last = Date.now();
+    localStorage.setItem("career_idle_v2", JSON.stringify(s));
+  }
+
+  function saveSoon() {
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(save, 700);
+  }
+
+  function toast(t) {
+    let e = $("toast");
+    e.textContent = t;
+    e.classList.add("show");
+    clearTimeout(e.timer);
+    e.timer = setTimeout(() => e.classList.remove("show"), 1800);
+  }
+
+  function checkAch() {
+    achievements.forEach(a => {
+      if (s.total >= a[4] && !s.ach.includes(a[0])) {
+        s.ach.push(a[0]);
+        toast("🏆 " + a[1]);
+      }
+    });
+  }
+
+  function update() {
+    let ri = rank(), r = ranks[ri], next = ranks[Math.min(ri + 1, 9)];
+
+    $("balance").textContent = money(s.balance);
+    $("income").textContent = "+" + fmt(income) + " ₽/сек";
+    $("rank").textContent = r.name;
+    $("level").textContent = "УРОВЕНЬ " + (ri + 1) + "/10";
+    $("badge").textContent = ri + 1;
+    $("clickValue").textContent = "+" + fmt(power) + " ₽ за клик";
+
+    // Обновляем экран 3D-ноутбука
+    if ($("screenIncome")) {
+      $("screenIncome").textContent = "+" + fmt(income) + " ₽/сек";
+    }
+
+    $("progress").style.width = (ri === 9 ? 100 : Math.min(100, (s.total - r.need) / (next.need - r.need) * 100)) + "%";
+    $("next").textContent = ri === 9 ? "Максимальный уровень!" : "До " + next.name + ": " + money(Math.max(0, next.need - s.total));
+
+    let stage = ri < 3 ? 1 : ri < 6 ? 2 : 3;
+    $("scene").className = "scene stage" + stage;
+    $("caption").textContent = ["НАЖМИ НА НОУТБУК", "ОФИС ПРОКАЧАН", "ОФИС РУКОВОДИТЕЛЯ"][stage - 1];
+
+    document.querySelectorAll(".upgrade").forEach((c, i) => {
+      let u = upgrades[i], un = s.total >= u[7], price = Math.ceil(u[4] * Math.pow(1.42, s.owned[u[0]] || 0)), can = un && s.balance >= price;
+      c.classList.toggle("can", can);
+      c.classList.toggle("locked", !un);
+      let b = c.querySelector("button");
+      b.disabled = !un;
+      b.classList.toggle("ready", can);
+      b.innerHTML = (un ? "Купить" : "Закрыто") + "<strong>" + (un ? "🪙 " + fmt(price) + " ₽" : "🔒") + "</strong>";
+    });
+  }
+
+  function render() {
+    let list = $("upgrades");
+    list.innerHTML = "";
+    upgrades.forEach(u => {
+      let c = document.createElement("article");
+      c.className = "upgrade";
+      c.innerHTML = `
+        <div class="art">${u[3]}</div>
+        <div class="copy">
+          <b>${u[1]} <span style="color:#a8f88d">×${s.owned[u[0]] || 0}</span></b>
+          <em>${u[6] ? "+" + u[6] + " ₽ к клику за покупку" : "+" + fmt(u[5]) + " ₽/сек"}</em>
+          <small>${u[2]}</small>
+        </div>
+        <button class="buy">Купить</button>`;
+      c.querySelector("button").onclick = () => buy(u);
+      list.appendChild(c);
+    });
+    $("owned").textContent = Object.values(s.owned).reduce((a, b) => a + b, 0) + " куплено";
+    update();
+  }
+
+  function buy(u) {
+    if (s.total < u[7]) return toast("Пока закрыто — заработай больше");
+    let count = s.owned[u[0]] || 0, price = Math.ceil(u[4] * Math.pow(1.42, count));
+    if (s.balance < price) return toast("Не хватает рублей");
+
+    let old = rank();
+    s.balance -= price;
+    s.owned[u[0]] = count + 1;
+    recalc();
+    render();
+
+    if (u[0] === "intern") toast("Стажёр прокачан! Теперь +" + power + " ₽ за клик ⚡");
+    else toast(u[1] + " куплен!");
+
+    if (rank() > old) {
+      $("scene").classList.add("levelup");
+      toast("✨ Карьерный рост: " + ranks[rank()].name);
+    }
+    save();
+  }
+
+  function earn() {
+    s.balance += power;
+    s.total += power;
+    s.clicks++;
+    checkAch();
+
+    let r = $("laptop").getBoundingClientRect(),
+        layer = $("floatLayer"),
+        root = $("scene").getBoundingClientRect();
+
+    let f = document.createElement("div");
+    f.className = "float";
+    f.textContent = "+" + fmt(power) + " ₽";
+    f.style.left = (r.left - root.left + r.width / 2) + "px";
+    f.style.top = (r.top - root.top + 30) + "px";
+    layer.appendChild(f);
+    setTimeout(() => f.remove(), 1050);
+
+    for (let i = 0; i < 5; i++) {
+      let c = document.createElement("span");
+      c.className = "coinfly";
+      c.textContent = "🪙";
+      c.style.left = (r.left - root.left + r.width / 2) + "px";
+      c.style.top = (r.top - root.top + 45) + "px";
+      c.style.setProperty("--dx", (Math.random() * 120 - 60) + "px");
+      c.style.setProperty("--dy", (-45 - Math.random() * 70) + "px");
+      layer.appendChild(c);
+      setTimeout(() => c.remove(), 1000);
+    }
+
+    // Перезапуск анимации нажатия
+    $("scene").classList.remove("clicking");
+    void $("scene").offsetWidth;
+    $("scene").classList.add("clicking");
+
+    update();
+    saveSoon();
+  }
+
+  function tab(name) {
+    $("upgrades").classList.toggle("hidden", name !== "home");
+    $("scene").classList.toggle("hidden", name !== "home");
+    $("earn").classList.toggle("hidden", name !== "home");
+    $("panel").classList.toggle("hidden", name === "home");
+
+    document.querySelectorAll("nav button").forEach(b => b.classList.toggle("active", b.dataset.tab === name));
+
+    let p = $("panel");
+    if (name === "stats") {
+      p.innerHTML = `
+        <h2>📊 Статистика</h2>
+        <div class="stat-grid">
+          <div class="stat"><small>Всего заработано</small><b>${money(s.total)}</b></div>
+          <div class="stat"><small>Доход в секунду</small><b>${fmt(income)} ₽</b></div>
+          <div class="stat"><small>Всего кликов</small><b>${fmt(s.clicks)}</b></div>
+          <div class="stat"><small>За клик</small><b>${fmt(power)} ₽</b></div>
+        </div>`;
+    }
+
+    if (name === "achievements") {
+      p.innerHTML = "<h2>🏆 Достижения</h2>" + achievements.map(a => `
+        <div class="achievement ${s.ach.includes(a[0]) ? "done" : ""}">
+          <span>${a[3]}</span>
+          <div><b>${a[1]}</b><small>${a[2]}</small></div>
+        </div>`).join("");
+    }
+
+    if (name === "bonus") {
+      let ready = Date.now() - s.bonus >= 86400000;
+      p.innerHTML = `
+        <div class="gift">🎁</div>
+        <h2 style="text-align:center">Ежедневный бонус</h2>
+        <p style="text-align:center;color:#c4c2ed">Подарок раз в 24 часа — 60 секунд пассивного дохода.</p>
+        <button class="bonus-button" id="claim" ${ready ? "" : "disabled"}>
+          ${ready ? "Забрать " + money(Math.max(25, income * 60)) : "Уже получен"}
+        </button>`;
+      $("claim").onclick = () => {
+        let gift = Math.max(25, income * 60);
+        s.bonus = Date.now();
+        s.balance += gift;
+        s.total += gift;
+        update();
+        tab("bonus");
+        toast("Подарок: " + money(gift));
+        save();
+      };
+    }
+
+    if (name === "shop") {
+      p.innerHTML = "<h2>🛒 Магазин</h2><p>Рабочее место меняется вместе с карьерой: домашний офис, прокачанный сетап и офис руководителя.</p>";
+    }
+  }
+
+  function tick() {
+    let now = Date.now(), dt = Math.min((now - last) / 1000, 5);
+    last = now;
+    if (income) {
+      let gain = income * dt;
+      s.balance += gain;
+      s.total += gain;
+      checkAch();
+      update();
+    }
+    saveSoon();
+    requestAnimationFrame(tick);
+  }
+
+  function init() {
+    recalc();
+
+    // Офлайн-доход
+    let away = Math.min(8 * 3600, Math.max(0, (Date.now() - (s.last || Date.now())) / 1000)), gain = away * income;
+    if (gain > 1) {
+      s.balance += gain;
+      s.total += gain;
+      setTimeout(() => toast("Пока тебя не было: +" + money(gain)), 350);
+    }
+
+    render();
+
+    // Обработчики кликов (кофе удален)
+    $("earn").onclick = earn;
+    $("laptop").onclick = earn;
+    $("laptop").onkeydown = e => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        earn();
+      }
+    };
+
+    // Навигация
+    document.querySelectorAll("nav button").forEach(b => b.onclick = () => tab(b.dataset.tab));
+
+    // Сброс
+    $("settings").onclick = () => {
+      if (confirm("Сбросить весь прогресс?")) {
+        localStorage.removeItem("career_idle_v2");
+        location.reload();
+      }
+    };
+
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) save();
+      else last = Date.now();
+    });
+
+    window.addEventListener("beforeunload", save);
+    requestAnimationFrame(tick);
+  }
+
+  init();
+})();

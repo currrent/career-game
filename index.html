@@ -1,7 +1,93 @@
-<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><meta name="theme-color" content="#171746"><title>Карьера — idle game</title><link rel="stylesheet" href="css/style.css"></head><body><div class="app">
-<header><div class="wallet"><b class="coin">₽</b><div><strong id="balance">0 ₽</strong><small id="income">+0 ₽/сек</small></div></div><button id="settings">⚙</button></header>
-<section class="career"><span class="briefcase">💼</span><div class="career-info"><div><b id="rank">Стажёр</b><small id="level">УРОВЕНЬ 1/10</small></div><div class="progress"><i id="progress"></i></div><small id="next">До Джуниора: 100 ₽</small></div><b class="level-badge" id="badge">1</b></section>
-<main><section id="scene" class="scene stage1"><div class="window">☀</div><div class="shelf">📚　🪴　📦</div><div class="plant">🪴</div><div class="cat" id="cat">🐈</div><div class="desk"></div><div class="setup"><div id="laptop" class="laptop" role="button" tabindex="0" aria-label="Нажми на ноутбук"><div class="screen"><span>🚀</span><small>✦　✧　·</small></div><div class="base"></div></div><div id="coffee" class="coffee">☕</div><div class="cactus">🌵</div></div><div class="scene-caption" id="caption">ДОМАШНИЙ ОФИС · УРОВЕНЬ 1</div><div id="floatLayer"></div><div class="hint">НАЖИМАЙ И ЗАРАБАТЫВАЙ</div></section>
-<button class="earn" id="earn"><span>✦</span><b>ЗАРАБОТАТЬ<small id="clickValue">+1 ₽ за клик</small></b><span>↗</span></button>
-<div class="section-title"><div><b>🚀 Улучшения</b><small>Прокачивай карьеру</small></div><small id="owned">0 куплено</small></div><div id="upgrades"></div><section id="panel" class="panel hidden"></section></main>
-<nav><button class="active" data-tab="home">⌂<small>Главная</small></button><button data-tab="stats">▥<small>Статистика</small></button><button data-tab="achievements">🏆<small>Награды</small></button><button data-tab="bonus">🎁<small>Бонус</small></button><button data-tab="shop">🛒<small>Магазин</small></button></nav><div id="toast"></div></div><script src="js/game.js"></script></body></html>
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#171746">
+  <title>Карьера — idle game</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app">
+    <header>
+      <div class="wallet">
+        <b class="coin">₽</b>
+        <div>
+          <strong id="balance">0 ₽</strong>
+          <small id="income">+0 ₽/сек</small>
+        </div>
+      </div>
+      <button id="settings">⚙</button>
+    </header>
+
+    <section class="career">
+      <span class="briefcase">💼</span>
+      <div class="career-info">
+        <div>
+          <b id="rank">Стажёр</b>
+          <small id="level">УРОВЕНЬ 1/10</small>
+        </div>
+        <div class="progress">
+          <i id="progress"></i>
+        </div>
+        <small id="next">До Джуниора: 100 ₽</small>
+      </div>
+      <b class="level-badge" id="badge">1</b>
+    </section>
+
+    <main>
+      <!-- НОВАЯ 3D СЦЕНА С НОУТБУКОМ -->
+      <section id="scene" class="scene stage1">
+        <div class="scene-caption" id="caption">НАЖМИ НА НОУТБУК</div>
+
+        <!-- Сам ноутбук (на него мы вешаем клик) -->
+        <div class="laptop-wrapper" id="laptop" role="button" tabindex="0" aria-label="Нажми на ноутбук">
+          <div class="laptop-3d">
+            <div class="laptop-screen">
+              <div class="screen-content">
+                <div class="cash-icon">₽</div>
+                <div class="screen-stats" id="screenIncome">+0 ₽/сек</div>
+              </div>
+            </div>
+            <div class="laptop-keyboard">
+              <div class="keys"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Сюда вылетают цифры и монетки -->
+        <div id="floatLayer"></div>
+      </section>
+
+      <button class="earn" id="earn">
+        <span>✦</span>
+        <b>ЗАРАБОТАТЬ<small id="clickValue">+1 ₽ за клик</small></b>
+        <span>↗</span>
+      </button>
+
+      <div class="section-title">
+        <div>
+          <b>🚀 Улучшения</b>
+          <small>Прокачивай карьеру</small>
+        </div>
+        <small id="owned">0 куплено</small>
+      </div>
+
+      <div id="upgrades"></div>
+      <section id="panel" class="panel hidden"></section>
+    </main>
+
+    <nav>
+      <button class="active" data-tab="home">⌂<small>Главная</small></button>
+      <button data-tab="stats">▥<small>Статистика</small></button>
+      <button data-tab="achievements">🏆<small>Награды</small></button>
+      <button data-tab="bonus">🎁<small>Бонус</small></button>
+      <button data-tab="shop">🛒<small>Магазин</small></button>
+    </nav>
+
+    <div id="toast"></div>
+  </div>
+
+  <script src="js/game.js"></script>
+</body>
+</html>

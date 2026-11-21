@@ -1,1 +1,678 @@
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% 0,#39327f,#171744 48%,#0d0d2b);color:white;font-family:system-ui,-apple-system,"Segoe UI",sans-serif}.app{width:min(100%,520px);margin:auto;padding:calc(env(safe-area-inset-top) + 12px) 13px calc(env(safe-area-inset-bottom) + 85px);overflow:hidden}button{font:inherit;color:inherit;border:0;cursor:pointer}header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.wallet{display:flex;align-items:center;gap:12px;background:linear-gradient(110deg,#292765,#17183e);border:1px solid #6968db;border-radius:20px;padding:8px 15px;min-width:78%;box-shadow:0 5px 18px #0005}.wallet strong{display:block;font-size:22px}.wallet small{color:#68ff5d;font-weight:900}.coin{display:grid;place-items:center;width:42px;height:42px;border-radius:50%;font-size:25px;color:#884500;background:radial-gradient(circle at 30% 25%,#fff6a1,#ffc329 52%,#df8700);border:3px solid #ffe98c;box-shadow:0 0 15px #ffbf2d88}header button{height:46px;width:46px;border-radius:15px;background:#302d70;border:1px solid #7771dc;font-size:24px}.career{display:flex;align-items:center;gap:12px;padding:11px 13px;border-radius:19px;background:linear-gradient(110deg,#40377f,#1a1b4d);border:1px solid #7770e7;margin-bottom:13px}.briefcase{font-size:34px}.career-info{flex:1}.career-info>div:first-child{display:flex;justify-content:space-between;align-items:center}.career-info b{font-size:18px}.career-info small{font-size:10px;color:#c9c7ef}.progress{height:9px;background:#12123a;border:1px solid #7772e2;border-radius:20px;margin:6px 0 4px;overflow:hidden}.progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,#43e84d,#b5ff48);border-radius:20px}.level-badge{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(#ffe57b,#ff9b19);color:#713500}.scene{height:315px;position:relative;overflow:hidden;border-radius:24px;background:linear-gradient(180deg,#7566ba,#e6a9b5 56%,#795187);border:2px solid #b5a1ff;box-shadow:0 10px 28px #07071f99,inset 0 0 28px #fff5}.scene:before{content:"";position:absolute;width:150px;height:150px;border-radius:50%;background:#ffedaa;filter:blur(32px);opacity:.8;right:25px;top:10px}.window{position:absolute;right:17px;top:20px;width:130px;height:100px;border:8px solid #eee5ff;border-radius:10px;background:linear-gradient(135deg,#7ad7ed,#e8b9dc);font-size:25px;text-align:right;padding:5px}.shelf{position:absolute;left:20px;top:26px;width:145px;height:8px;background:#704d72;border-radius:8px;font-size:20px;text-align:center}.plant{position:absolute;left:18px;top:93px;font-size:58px}.cat{position:absolute;left:8px;bottom:70px;font-size:62px;z-index:3;filter:drop-shadow(0 5px 4px #47244c66);animation:breathe 3s infinite}.desk{position:absolute;bottom:40px;left:-3%;width:106%;height:75px;background:linear-gradient(#bd826f,#754a5c);border-top:8px solid #e8a28b}.setup{position:absolute;bottom:75px;left:25%;width:68%;height:160px;display:flex;align-items:flex-end;justify-content:center;gap:13px;z-index:4}.laptop{width:185px;height:138px;position:relative;cursor:pointer;transform-origin:50% 100%;filter:drop-shadow(0 12px 7px #34204766)}.screen{position:absolute;left:12px;right:12px;top:0;height:110px;border:8px solid #34365b;border-bottom:5px solid #252746;border-radius:12px 12px 5px 5px;background:radial-gradient(circle at 50% 55%,#a8f8ff,#4b65dd 35%,#18184d 75%);display:grid;place-items:center;box-shadow:inset 0 0 22px #73d9ff88}.screen span{font-size:50px;filter:drop-shadow(0 0 10px white)}.screen small{position:absolute;top:7px;color:#fff9}.base{position:absolute;bottom:0;left:0;right:0;height:26px;background:linear-gradient(#dce8fa,#889bbd 60%,#58688d);clip-path:polygon(8% 0,92% 0,100% 85%,96% 100%,4% 100%,0 85%);border-radius:0 0 12px 12px}.coffee{font-size:42px;margin-bottom:4px;transform-origin:bottom center}.cactus{font-size:27px;margin-bottom:4px}.scene-caption{position:absolute;left:11px;top:11px;padding:6px 8px;background:#241d56bb;border:1px solid #fff5;border-radius:8px;font-size:9px;font-weight:900;letter-spacing:.6px;z-index:5}.hint{position:absolute;bottom:10px;left:0;right:0;text-align:center;font-size:9px;letter-spacing:2px;font-weight:1000;text-shadow:0 2px 5px #3e245d}.earn{width:100%;margin:12px 0 16px;padding:11px 18px;border-radius:18px;background:linear-gradient(#7bff59,#24c735 55%,#079b45);border:2px solid #baff83;box-shadow:0 5px 0 #087a39,0 0 18px #40ff5688;display:flex;align-items:center;justify-content:center;gap:13px;min-height:64px;text-shadow:0 2px 3px #167a22}.earn:active{transform:translateY(4px);box-shadow:0 1px 0 #087a39}.earn b{font-size:18px}.earn small{display:block;font-size:12px}.earn span{font-size:24px}.section-title{display:flex;justify-content:space-between;align-items:center;margin:7px 2px 10px}.section-title b{font-size:17px}.section-title small{display:block;color:#c3c1ed;font-size:10px}.section-title>small{background:#34316e;padding:6px 9px;border-radius:18px}#upgrades{display:grid;gap:8px}.upgrade{display:flex;align-items:center;gap:10px;padding:9px;border-radius:16px;background:linear-gradient(110deg,#373273,#252252);border:1px solid #6962b9;min-height:73px;box-shadow:0 4px 12px #07071e66}.upgrade.can{border-color:#8af46b;box-shadow:0 0 12px #5df34b33}.upgrade.locked{opacity:.62}.art{width:49px;height:49px;flex:0 0 49px;border-radius:13px;background:linear-gradient(145deg,#5a57a7,#282451);display:grid;place-items:center;font-size:28px}.copy{min-width:0;flex:1}.copy b{display:block;font-size:13px}.copy em{display:block;color:#65ff64;font-style:normal;font-weight:900;font-size:11px}.copy small{display:block;color:#c2c1e8;font-size:9px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.buy{min-width:82px;padding:7px 6px;border-radius:12px;background:#514d80;border:1px solid #9993d4;font-size:10px}.buy strong{display:block;font-size:10px}.buy.ready{background:linear-gradient(#8aff58,#22c438);border-color:#c6ff9e;color:#145b22;box-shadow:0 3px 0 #13752b}.buy.ready strong{color:white}nav{position:fixed;z-index:20;bottom:0;left:50%;transform:translateX(-50%);width:min(100%,520px);display:flex;justify-content:space-around;padding:8px 5px calc(env(safe-area-inset-bottom) + 8px);background:#15143eef;backdrop-filter:blur(16px);border-top:1px solid #6762c9}nav button{display:flex;flex-direction:column;align-items:center;gap:2px;background:transparent;color:#bcb9e9;font-size:19px;min-width:55px;padding:4px;border-radius:11px}nav small{font-size:9px}nav button.active{color:#8aff69;background:#3b347b;box-shadow:inset 0 0 0 1px #7771d9}.panel{padding:15px;border-radius:17px;background:linear-gradient(145deg,#333071,#1e1d4c);border:1px solid #6e68c6;min-height:230px}.panel h2{font-size:18px;margin:0 0 13px}.hidden{display:none!important}.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.stat{padding:11px;border-radius:12px;background:#171744;border:1px solid #55529d}.stat small{display:block;color:#aaa9d7;font-size:10px}.stat b{display:block;font-size:15px;margin-top:5px}.achievement{display:flex;gap:11px;align-items:center;padding:10px 0;border-bottom:1px solid #ffffff18}.achievement span{font-size:26px}.achievement small{display:block;color:#bdbce7;font-size:10px}.achievement:not(.done){opacity:.5}.achievement.done b{color:#a4ff72}.gift{text-align:center;font-size:52px}.bonus-button{display:block;margin:12px auto;background:linear-gradient(#8aff58,#20be3b);border-radius:13px;padding:11px 20px;font-weight:900;color:#154b22}.toast{position:fixed;z-index:50;left:50%;bottom:95px;transform:translate(-50%,18px);opacity:0;background:#24215f;border:1px solid #9a91ff;border-radius:13px;padding:11px 16px;font-size:12px;font-weight:800;transition:.2s;white-space:nowrap;max-width:92vw;pointer-events:none}.toast.show{opacity:1;transform:translate(-50%,0)}.float{position:absolute;color:#fff56a;font-weight:1000;font-size:22px;text-shadow:0 2px 4px #8d3b00,0 0 14px white;animation:up 1s forwards;z-index:10;pointer-events:none}.coinfly{position:absolute;animation:fly 1s ease-out forwards;z-index:10;pointer-events:none}@keyframes tap{0%{transform:translateY(0)}35%{transform:translateY(13px) rotate(-2deg) scale(.97)}70%{transform:translateY(-8px) rotate(1deg) scale(1.02)}100%{transform:none}}@keyframes wiggle{25%{transform:rotate(-13deg) translateY(-5px)}55%{transform:rotate(12deg)}80%{transform:rotate(-5deg)}}@keyframes breathe{50%{transform:scale(1.04,.97)}}@keyframes up{0%{opacity:0;transform:translateY(8px) scale(.7)}15%{opacity:1}100%{opacity:0;transform:translateY(-75px) scale(1.2)}}@keyframes fly{0%{opacity:0;transform:translate(0,0) scale(.4)}20%{opacity:1}100%{opacity:0;transform:translate(var(--dx),var(--dy)) rotate(300deg)}}@media(max-width:360px){.scene{height:285px}.laptop{width:158px;height:120px}.screen{height:94px}.setup{left:21%;gap:7px}.career-info b{font-size:16px}}.stage2{background:linear-gradient(#4d8cae,#a9b6d9 55%,#705a9b)}.stage3{background:linear-gradient(#313c82,#8d82cf 55%,#44386d)}.stage2 .screen{background:radial-gradient(circle,#69f4e8,#3658a8 55%,#10183d)}.stage3 .screen{background:radial-gradient(circle,#ffe58a,#ed8c44 35%,#34235f 75%)}.clicking .laptop{animation:tap .32s cubic-bezier(.2,.9,.3,1)}.clicking .coffee{animation:wiggle .38s ease}.levelup{animation:flash .7s ease}@keyframes flash{30%{filter:brightness(1.6) saturate(1.5)}60%{filter:brightness(1.2)}}
+/* =========================================
+   БАЗОВЫЕ СТИЛИ И СБРОС
+   ========================================= */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: radial-gradient(ellipse at 50% 0, #39327f, #171744 48%, #0d0d2b);
+  color: white;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  border: 0;
+  cursor: pointer;
+}
+
+.app {
+  width: min(100%, 520px);
+  margin: auto;
+  padding: calc(env(safe-area-inset-top) + 12px) 13px calc(env(safe-area-inset-bottom) + 85px);
+  overflow: hidden;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* =========================================
+   ШАПКА (БАЛАНС И НАСТРОЙКИ)
+   ========================================= */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.wallet {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: linear-gradient(110deg, #292765, #17183e);
+  border: 1px solid #6968db;
+  border-radius: 20px;
+  padding: 8px 15px;
+  min-width: 78%;
+  box-shadow: 0 5px 18px #0005;
+}
+
+.wallet strong {
+  display: block;
+  font-size: 22px;
+}
+
+.wallet small {
+  color: #68ff5d;
+  font-weight: 900;
+}
+
+.coin {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  font-size: 25px;
+  color: #884500;
+  background: radial-gradient(circle at 30% 25%, #fff6a1, #ffc329 52%, #df8700);
+  border: 3px solid #ffe98c;
+  box-shadow: 0 0 15px #ffbf2d88;
+}
+
+header button {
+  height: 46px;
+  width: 46px;
+  border-radius: 15px;
+  background: #302d70;
+  border: 1px solid #7771dc;
+  font-size: 24px;
+}
+
+/* =========================================
+   КАРЬЕРНАЯ ПАНЕЛЬ
+   ========================================= */
+.career {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 13px;
+  border-radius: 19px;
+  background: linear-gradient(110deg, #40377f, #1a1b4d);
+  border: 1px solid #7770e7;
+  margin-bottom: 13px;
+}
+
+.briefcase {
+  font-size: 34px;
+}
+
+.career-info {
+  flex: 1;
+}
+
+.career-info > div:first-child {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.career-info b {
+  font-size: 18px;
+}
+
+.career-info small {
+  font-size: 10px;
+  color: #c9c7ef;
+}
+
+.progress {
+  height: 9px;
+  background: #12123a;
+  border: 1px solid #7772e2;
+  border-radius: 20px;
+  margin: 6px 0 4px;
+  overflow: hidden;
+}
+
+.progress i {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, #43e84d, #b5ff48);
+  border-radius: 20px;
+}
+
+.level-badge {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(#ffe57b, #ff9b19);
+  color: #713500;
+  font-weight: bold;
+}
+
+/* =========================================
+   3D СЦЕНА С НОУТБУКОМ
+   ========================================= */
+.scene {
+  height: 340px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+  background: radial-gradient(circle at 50% 30%, #4a3f8a, #211d4d 60%, #0d0d2b);
+  border: 2px solid #6968db;
+  box-shadow: 0 10px 28px #07071f99, inset 0 0 40px #00000088;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1000px;
+}
+
+/* Смена фонов в зависимости от ранга */
+.stage2 {
+  background: radial-gradient(circle at 50% 30%, #2b638a, #1a2c5a 60%, #0d0d2b);
+}
+.stage3 {
+  background: radial-gradient(circle at 50% 30%, #6a2b8a, #1a1a5a 60%, #0d0d2b);
+}
+
+.scene-caption {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 8px 16px;
+  background: rgba(36, 29, 86, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  color: #8aff58;
+  text-shadow: 0 0 10px rgba(138, 255, 88, 0.5);
+  z-index: 5;
+  white-space: nowrap;
+}
+
+.laptop-wrapper {
+  width: 320px;
+  height: 220px;
+  position: relative;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  margin-top: 30px;
+}
+
+.laptop-3d {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transform: rotateX(10deg) rotateY(-15deg) rotateZ(2deg);
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.laptop-screen {
+  position: absolute;
+  top: 0;
+  left: 20px;
+  width: 280px;
+  height: 170px;
+  background: #12121e;
+  border: 10px solid #3a3a4e;
+  border-radius: 16px 16px 4px 4px;
+  box-shadow:
+      inset 0 0 20px rgba(0,0,0,1),
+      0 10px 20px rgba(0,0,0,0.5),
+      0 0 40px rgba(138, 255, 88, 0.15);
+  transform-origin: bottom;
+  transform: rotateX(-15deg);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.screen-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(138,255,88,0.05) 0%, transparent 100%);
+}
+
+.cash-icon {
+  font-size: 65px;
+  font-weight: 900;
+  color: #8aff58;
+  text-shadow: 0 0 20px #8aff58;
+  margin-bottom: 10px;
+  animation: pulseCoin 2.5s infinite;
+}
+
+.screen-stats {
+  font-size: 14px;
+  color: #fff;
+  font-weight: bold;
+  background: rgba(0,0,0,0.6);
+  padding: 4px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(138, 255, 88, 0.3);
+}
+
+.laptop-keyboard {
+  position: absolute;
+  bottom: 25px;
+  left: -10px;
+  width: 340px;
+  height: 110px;
+  background: linear-gradient(#4a4a5e, #2a2a3e);
+  border-radius: 4px 4px 20px 20px;
+  transform-origin: top;
+  transform: rotateX(80deg);
+  box-shadow: 0 25px 35px rgba(0,0,0,0.8);
+  border: 2px solid #5a5a6e;
+  overflow: hidden;
+}
+
+.keys {
+  width: 90%;
+  height: 75%;
+  margin: 10px auto;
+  background-image:
+      repeating-linear-gradient(90deg, transparent, transparent 22px, #1a1a2e 22px, #1a1a2e 24px),
+      repeating-linear-gradient(0deg, transparent, transparent 18px, #1a1a2e 18px, #1a1a2e 20px);
+  opacity: 0.6;
+  border-radius: 5px;
+}
+
+/* Анимация нажатия на ноутбук */
+.clicking .laptop-3d {
+  animation: laptopPress 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Слой для всплывающих цифр и монет */
+#floatLayer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* =========================================
+   КНОПКА ЗАРАБОТАТЬ
+   ========================================= */
+.earn {
+  width: 100%;
+  margin: 12px 0 16px;
+  padding: 11px 18px;
+  border-radius: 18px;
+  background: linear-gradient(#7bff59, #24c735 55%, #079b45);
+  border: 2px solid #baff83;
+  box-shadow: 0 5px 0 #087a39, 0 0 18px #40ff5688;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 13px;
+  min-height: 64px;
+  text-shadow: 0 2px 3px #167a22;
+  transition: transform 0.1s;
+}
+
+.earn:active {
+  transform: translateY(4px);
+  box-shadow: 0 1px 0 #087a39;
+}
+
+.earn b {
+  font-size: 18px;
+}
+
+.earn small {
+  display: block;
+  font-size: 12px;
+}
+
+.earn span {
+  font-size: 24px;
+}
+
+/* =========================================
+   УЛУЧШЕНИЯ
+   ========================================= */
+.section-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 7px 2px 10px;
+}
+
+.section-title b {
+  font-size: 17px;
+}
+
+.section-title small {
+  display: block;
+  color: #c3c1ed;
+  font-size: 10px;
+}
+
+.section-title > small {
+  background: #34316e;
+  padding: 6px 9px;
+  border-radius: 18px;
+}
+
+#upgrades {
+  display: grid;
+  gap: 8px;
+}
+
+.upgrade {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px;
+  border-radius: 16px;
+  background: linear-gradient(110deg, #373273, #252252);
+  border: 1px solid #6962b9;
+  min-height: 73px;
+  box-shadow: 0 4px 12px #07071e66;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.upgrade.can {
+  border-color: #8af46b;
+  box-shadow: 0 0 12px #5df34b33;
+}
+
+.upgrade.locked {
+  opacity: 0.62;
+}
+
+.art {
+  width: 49px;
+  height: 49px;
+  flex: 0 0 49px;
+  border-radius: 13px;
+  background: linear-gradient(145deg, #5a57a7, #282451);
+  display: grid;
+  place-items: center;
+  font-size: 28px;
+}
+
+.copy {
+  min-width: 0;
+  flex: 1;
+}
+
+.copy b {
+  display: block;
+  font-size: 13px;
+}
+
+.copy em {
+  display: block;
+  color: #65ff64;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 11px;
+}
+
+.copy small {
+  display: block;
+  color: #c2c1e8;
+  font-size: 9px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.buy {
+  min-width: 82px;
+  padding: 7px 6px;
+  border-radius: 12px;
+  background: #514d80;
+  border: 1px solid #9993d4;
+  font-size: 10px;
+  transition: transform 0.1s;
+}
+
+.buy:active {
+  transform: scale(0.95);
+}
+
+.buy strong {
+  display: block;
+  font-size: 10px;
+}
+
+.buy.ready {
+  background: linear-gradient(#8aff58, #22c438);
+  border-color: #c6ff9e;
+  color: #145b22;
+  box-shadow: 0 3px 0 #13752b;
+}
+
+.buy.ready strong {
+  color: white;
+}
+
+/* =========================================
+   НИЖНЯЯ НАВИГАЦИЯ
+   ========================================= */
+nav {
+  position: fixed;
+  z-index: 20;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(100%, 520px);
+  display: flex;
+  justify-content: space-around;
+  padding: 8px 5px calc(env(safe-area-inset-bottom) + 8px);
+  background: #15143eef;
+  backdrop-filter: blur(16px);
+  border-top: 1px solid #6762c9;
+}
+
+nav button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  background: transparent;
+  color: #bcb9e9;
+  font-size: 19px;
+  min-width: 55px;
+  padding: 4px;
+  border-radius: 11px;
+}
+
+nav small {
+  font-size: 9px;
+}
+
+nav button.active {
+  color: #8aff69;
+  background: #3b347b;
+  box-shadow: inset 0 0 0 1px #7771d9;
+}
+
+/* =========================================
+   ПАНЕЛИ (ВКЛАДКИ)
+   ========================================= */
+.panel {
+  padding: 15px;
+  border-radius: 17px;
+  background: linear-gradient(145deg, #333071, #1e1d4c);
+  border: 1px solid #6e68c6;
+  min-height: 230px;
+}
+
+.panel h2 {
+  font-size: 18px;
+  margin: 0 0 13px;
+}
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.stat {
+  padding: 11px;
+  border-radius: 12px;
+  background: #171744;
+  border: 1px solid #55529d;
+}
+
+.stat small {
+  display: block;
+  color: #aaa9d7;
+  font-size: 10px;
+}
+
+.stat b {
+  display: block;
+  font-size: 15px;
+  margin-top: 5px;
+}
+
+.achievement {
+  display: flex;
+  gap: 11px;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #ffffff18;
+}
+
+.achievement span {
+  font-size: 26px;
+}
+
+.achievement small {
+  display: block;
+  color: #bdbce7;
+  font-size: 10px;
+}
+
+.achievement:not(.done) {
+  opacity: 0.5;
+}
+
+.achievement.done b {
+  color: #a4ff72;
+}
+
+.gift {
+  text-align: center;
+  font-size: 52px;
+}
+
+.bonus-button {
+  display: block;
+  margin: 12px auto;
+  background: linear-gradient(#8aff58, #20be3b);
+  border-radius: 13px;
+  padding: 11px 20px;
+  font-weight: 900;
+  color: #154b22;
+}
+
+/* =========================================
+   ВСПЛЫВАЮЩИЕ УВЕДОМЛЕНИЯ И ЭФФЕКТЫ
+   ========================================= */
+.toast {
+  position: fixed;
+  z-index: 50;
+  left: 50%;
+  bottom: 95px;
+  transform: translate(-50%, 18px);
+  opacity: 0;
+  background: #24215f;
+  border: 1px solid #9a91ff;
+  border-radius: 13px;
+  padding: 11px 16px;
+  font-size: 12px;
+  font-weight: 800;
+  transition: 0.2s;
+  white-space: nowrap;
+  max-width: 92vw;
+  pointer-events: none;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.float {
+  position: absolute;
+  color: #fff56a;
+  font-weight: 1000;
+  font-size: 22px;
+  text-shadow: 0 2px 4px #8d3b00, 0 0 14px white;
+  animation: up 1s forwards;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.coinfly {
+  position: absolute;
+  animation: fly 1s ease-out forwards;
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* =========================================
+   АНИМАЦИИ (KEYFRAMES)
+   ========================================= */
+@keyframes laptopPress {
+  0% { transform: rotateX(10deg) rotateY(-15deg) rotateZ(2deg) scale(1) translateY(0); }
+  40% { transform: rotateX(18deg) rotateY(-10deg) rotateZ(0deg) scale(0.94) translateY(25px); }
+  100% { transform: rotateX(10deg) rotateY(-15deg) rotateZ(2deg) scale(1) translateY(0); }
+}
+
+@keyframes pulseCoin {
+  0% { transform: scale(1); filter: drop-shadow(0 0 10px #8aff58); }
+  50% { transform: scale(1.08); filter: drop-shadow(0 0 30px #8aff58); }
+  100% { transform: scale(1); filter: drop-shadow(0 0 10px #8aff58); }
+}
+
+@keyframes up {
+  0% { opacity: 0; transform: translateY(8px) scale(0.7); }
+  15% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-75px) scale(1.2); }
+}
+
+@keyframes fly {
+  0% { opacity: 0; transform: translate(0, 0) scale(0.4); }
+  20% { opacity: 1; }
+  100% { opacity: 0; transform: translate(var(--dx), var(--dy)) rotate(300deg); }
+}
+
+@keyframes flash {
+  30% { filter: brightness(1.6) saturate(1.5); }
+  60% { filter: brightness(1.2); }
+}
+
+.levelup {
+  animation: flash 0.7s ease;
+}
+
+/* =========================================
+   АДАПТИВНОСТЬ ДЛЯ МАЛЕНЬКИХ ЭКРАНОВ
+   ========================================= */
+@media (max-width: 360px) {
+  .scene {
+    height: 300px;
+  }
+  .laptop-wrapper {
+    transform: scale(0.85);
+  }
+  .career-info b {
+    font-size: 16px;
+  }
+}
