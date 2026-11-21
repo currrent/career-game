@@ -711,3 +711,46 @@ nav button.active {
     font-size: 16px;
   }
 }
+/* Новый игровой 3D-ноутбук */
+.laptop-wrapper {
+  width: min(100%, 460px);
+  aspect-ratio: 3 / 2;
+  height: auto;
+  position: relative;
+  cursor: pointer;
+  margin: 10px auto 0;
+  animation: floatIdle 3s ease-in-out infinite;
+}
+
+.laptop-art {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Убираем старые CSS-детали ноутбука */
+.laptop-shadow,
+.laptop-screen,
+.laptop-base {
+  display: none;
+}
+
+/* Анимация нажатия */
+.clicking .laptop-wrapper {
+  animation: laptopPress 0.25s ease-out;
+}
+
+@keyframes laptopPress {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(8px) scale(0.97);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
