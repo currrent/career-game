@@ -40,25 +40,31 @@
       <section id="scene" class="scene stage1">
         <div class="scene-caption" id="caption">НАЖМИ НА НОУТБУК</div>
 
-        <!-- Сам ноутбук (на него мы вешаем клик) -->
+        <!-- Сам ноутбук -->
         <div class="laptop-wrapper" id="laptop" role="button" tabindex="0" aria-label="Нажми на ноутбук">
-          <div class="laptop-3d">
-            <div class="laptop-screen">
-              <div class="screen-content">
-                <div class="cash-icon">₽</div>
-                <div class="screen-stats" id="screenIncome">+0 ₽/сек</div>
-              </div>
-            </div>
-            <div class="laptop-keyboard">
-              <div class="keys"></div>
+
+          <!-- Тень под ноутбуком -->
+          <div class="laptop-shadow"></div>
+
+          <!-- Экран -->
+          <div class="laptop-screen">
+            <div class="screen-content">
+              <div class="cash-icon">₽</div>
+              <div class="screen-stats" id="screenIncome">+0 ₽/сек</div>
             </div>
           </div>
+
+          <!-- Клавиатура (основание) -->
+          <div class="laptop-base">
+            <div class="keyboard-keys"></div>
+            <div class="trackpad"></div>
+          </div>
+
         </div>
 
         <!-- Сюда вылетают цифры и монетки -->
         <div id="floatLayer"></div>
       </section>
-
       <button class="earn" id="earn">
         <span>✦</span>
         <b>ЗАРАБОТАТЬ<small id="clickValue">+1 ₽ за клик</small></b>

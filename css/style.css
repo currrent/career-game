@@ -150,7 +150,7 @@ header button {
 }
 
 /* =========================================
-   3D СЦЕНА С НОУТБУКОМ
+   НОВАЯ 3D СЦЕНА С НОУТБУКОМ (2.5D)
    ========================================= */
 .scene {
   height: 340px;
@@ -163,16 +163,10 @@ header button {
   display: flex;
   align-items: center;
   justify-content: center;
-  perspective: 1000px;
 }
 
-/* Смена фонов в зависимости от ранга */
-.stage2 {
-  background: radial-gradient(circle at 50% 30%, #2b638a, #1a2c5a 60%, #0d0d2b);
-}
-.stage3 {
-  background: radial-gradient(circle at 50% 30%, #6a2b8a, #1a1a5a 60%, #0d0d2b);
-}
+.stage2 { background: radial-gradient(circle at 50% 30%, #2b638a, #1a2c5a 60%, #0d0d2b); }
+.stage3 { background: radial-gradient(circle at 50% 30%, #6a2b8a, #1a1a5a 60%, #0d0d2b); }
 
 .scene-caption {
   position: absolute;
@@ -192,45 +186,51 @@ header button {
   white-space: nowrap;
 }
 
+/* Контейнер ноутбука */
 .laptop-wrapper {
-  width: 320px;
-  height: 220px;
+  width: 340px;
+  height: 250px;
   position: relative;
   cursor: pointer;
-  transform-style: preserve-3d;
   margin-top: 30px;
+  /* Плавное парение ноутбука в простое */
+  animation: floatIdle 3s ease-in-out infinite;
 }
 
-.laptop-3d {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  transform-style: preserve-3d;
-  transform: rotateX(10deg) rotateY(-15deg) rotateZ(2deg);
-  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+/* Тень под ноутбуком */
+.laptop-shadow {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 280px;
+  height: 20px;
+  background: rgba(0,0,0,0.7);
+  border-radius: 50%;
+  filter: blur(12px);
+  z-index: 0;
+  animation: shadowIdle 3s ease-in-out infinite;
 }
 
+/* Экран ноутбука */
 .laptop-screen {
   position: absolute;
   top: 0;
-  left: 20px;
+  left: 30px;
   width: 280px;
-  height: 170px;
+  height: 180px;
   background: #12121e;
-  border: 10px solid #3a3a4e;
+  border: 12px solid #2a2a3e;
   border-radius: 16px 16px 4px 4px;
-  box-shadow:
-      inset 0 0 20px rgba(0,0,0,1),
-      0 10px 20px rgba(0,0,0,0.5),
-      0 0 40px rgba(138, 255, 88, 0.15);
-  transform-origin: bottom;
-  transform: rotateX(-15deg);
+  box-shadow: inset 0 0 30px #000, 0 10px 25px rgba(0,0,0,0.8);
   overflow: hidden;
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+/* Содержимое экрана */
 .screen-content {
   display: flex;
   flex-direction: column;
@@ -238,16 +238,16 @@ header button {
   justify-content: center;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, rgba(138,255,88,0.05) 0%, transparent 100%);
+  background: radial-gradient(circle at 50% 50%, #1a3a2a, #0a0a14);
 }
 
 .cash-icon {
   font-size: 65px;
   font-weight: 900;
   color: #8aff58;
-  text-shadow: 0 0 20px #8aff58;
-  margin-bottom: 10px;
-  animation: pulseCoin 2.5s infinite;
+  text-shadow: 0 0 25px #8aff58;
+  margin-bottom: 5px;
+  animation: pulseCoin 2s infinite;
 }
 
 .screen-stats {
@@ -258,40 +258,53 @@ header button {
   padding: 4px 12px;
   border-radius: 10px;
   border: 1px solid rgba(138, 255, 88, 0.3);
+  box-shadow: 0 0 10px rgba(138, 255, 88, 0.2);
 }
 
-.laptop-keyboard {
+/* База (клавиатура) */
+.laptop-base {
   position: absolute;
-  bottom: 25px;
-  left: -10px;
+  bottom: 30px;
+  left: 0;
   width: 340px;
-  height: 110px;
-  background: linear-gradient(#4a4a5e, #2a2a3e);
-  border-radius: 4px 4px 20px 20px;
-  transform-origin: top;
-  transform: rotateX(80deg);
-  box-shadow: 0 25px 35px rgba(0,0,0,0.8);
-  border: 2px solid #5a5a6e;
-  overflow: hidden;
+  height: 90px;
+  background: linear-gradient(180deg, #5a5a6e, #2a2a3e);
+  border-radius: 6px 6px 20px 20px;
+  /* Делаем трапецию для эффекта перспективы */
+  clip-path: polygon(5% 0, 95% 0, 100% 100%, 0% 100%);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.6);
+  z-index: 1;
+  border-top: 2px solid #888;
 }
 
-.keys {
-  width: 90%;
-  height: 75%;
-  margin: 10px auto;
+/* Имитация клавиш */
+.keyboard-keys {
+  width: 85%;
+  height: 45px;
+  margin: 10px auto 0;
   background-image:
-      repeating-linear-gradient(90deg, transparent, transparent 22px, #1a1a2e 22px, #1a1a2e 24px),
-      repeating-linear-gradient(0deg, transparent, transparent 18px, #1a1a2e 18px, #1a1a2e 20px);
+    repeating-linear-gradient(90deg, transparent, transparent 15px, #1a1a2e 15px, #1a1a2e 18px),
+    repeating-linear-gradient(0deg, transparent, transparent 12px, #1a1a2e 12px, #1a1a2e 14px);
   opacity: 0.6;
-  border-radius: 5px;
+  border-radius: 4px;
 }
 
-/* Анимация нажатия на ноутбук */
-.clicking .laptop-3d {
-  animation: laptopPress 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+/* Тачпад */
+.trackpad {
+  width: 50px;
+  height: 20px;
+  background: #1a1a2e;
+  margin: 0 auto;
+  border-radius: 4px;
+  opacity: 0.8;
 }
 
-/* Слой для всплывающих цифр и монет */
+/* Анимация нажатия */
+.clicking .laptop-wrapper {
+  animation: laptopPress 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Слой для монет */
 #floatLayer {
   position: absolute;
   inset: 0;
@@ -299,6 +312,28 @@ header button {
   z-index: 10;
 }
 
+/* Новые Keyframes для анимаций */
+@keyframes laptopPress {
+  0% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(15px) scale(0.96); }
+  100% { transform: translateY(0) scale(1); }
+}
+
+@keyframes floatIdle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes shadowIdle {
+  0%, 100% { transform: translateX(-50%) scale(1); opacity: 0.7; }
+  50% { transform: translateX(-50%) scale(0.9); opacity: 0.4; }
+}
+
+@keyframes pulseCoin {
+  0% { transform: scale(1); filter: drop-shadow(0 0 10px #8aff58); }
+  50% { transform: scale(1.1); filter: drop-shadow(0 0 35px #8aff58); }
+  100% { transform: scale(1); filter: drop-shadow(0 0 10px #8aff58); }
+}
 /* =========================================
    КНОПКА ЗАРАБОТАТЬ
    ========================================= */
