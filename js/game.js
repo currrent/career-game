@@ -102,7 +102,9 @@
     $("next").textContent = ri === 9 ? "Максимальный уровень!" : "До " + next.name + ": " + money(Math.max(0, next.need - s.total));
 
     let stage = ri < 3 ? 1 : ri < 6 ? 2 : 3;
-    $("scene").className = "scene stage" + stage;
+    const scene = $("scene");
+    scene.classList.remove("stage1", "stage2", "stage3");
+    scene.classList.add("stage" + stage);
     $("caption").textContent = ["НАЖМИ НА НОУТБУК", "ОФИС ПРОКАЧАН", "ОФИС РУКОВОДИТЕЛЯ"][stage - 1];
 
     document.querySelectorAll(".upgrade").forEach((c, i) => {
